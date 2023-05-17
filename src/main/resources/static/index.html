@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulario</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>BREAST CANCER SCREENING</h1>
+  </header>
+
+  <div class="image-container">
+    <img src="./lazo.png" alt="Imagen">
+  </div>
+
+  <div class="tabs">
+    <button id="dataButton" class="tablink button-primary" onclick="openTab('dataTab', this)">Ingresar Datos</button>
+    <button id="imageButton" class="tablink button-primary" onclick="openTab('imageTab', this)">Cargar Imagen</button>
+  </div>
+
+  <div id="dataTab" class="tabcontent">
+    <form id="dataForm" action="/cancer/data" method="post">
+      <div class="form-container">
+        <input type="text" id="severity" name="severity" placeholder="SEVERITY">
+        <input type="text" id="x" name="x" placeholder="X">
+        <input type="text" id="y" name="y" placeholder="Y">
+        <input type="text" id="radius" name="radius" placeholder="RADIUS">
+      </div>
+      <button class="tablink button-primary" type="submit" class="submit-button">Enviar</button>
+    </form>
+  </div>
+
+  <div id="imageTab" class="tabcontent">
+    <form id="imageForm" action="/cancer/image" method="post" enctype="multipart/form-data">
+      <input class="tablink button-primary" type="file" id="fileInput" name="fileInput" accept="image/*">
+      <button class="tablink button-primary" type="submit" class="submit-button">Cargar Imagen</button>
+    </form>
+  </div>
+
+  <div id="backButton" style="display: none;">
+    <button class="tablink button-primary" onclick="goBack()">Volver</button>
+  </div>
+</div>
+
+<script>
+        function openTab(tabName, button) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            button.className += " active";
+
+            document.getElementById("backButton").style.display = "block";
+            document.getElementById("dataButton").style.display = "none";
+            document.getElementById("imageButton").style.display = "none";
+        }
+
+        function goBack() {
+            var tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (var i = 0; i < tabcontent.length; i++) {
+              tabcontent[i].style.display = "none";
+              }
+              tablinks = document.getElementsByClassName("tablink");
+              for (var i = 0; i < tablinks.length; i++) {
+              tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+        document.getElementById("backButton").style.display = "none";
+        document.getElementById("dataButton").style.display = "block";
+        document.getElementById("imageButton").style.display = "block";
+    }
+</script>
+</body>
+</html>
+
+
