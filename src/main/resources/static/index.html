@@ -33,9 +33,10 @@
   </div>
 
   <div id="imageTab" class="tabcontent">
-    <form id="imageForm" action="/cancer/image" method="post" enctype="multipart/form-data">
-      <input class="tablink button-primary" type="file" id="fileInput" name="fileInput" accept="image/*">
-      <button class="tablink button-primary" type="submit" class="submit-button">Cargar Imagen</button>
+    <form id="uploadForm" method='post' enctype="multipart/form-data">
+      <input type='file' name="upFile" id="upFile" required="" />
+      <br>
+      <input type='submit' value='Subir'/>
     </form>
   </div>
 
@@ -66,6 +67,12 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<!-- AWS S3 -->
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.24.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="aws_config.js"></script>
+
 <script>
   function openTab(tabName, button) {
     var i, tabcontent, tablinks;
@@ -116,7 +123,7 @@
       var resultMessage = (severityValue === "B") ? "El tumor es Benigno" : "El tumor es Maligno";
       showResultMessage(resultMessage);
     } else {
-      alert("El valor de SEVERITY debe ser 'B'  o 'M'.");
+      alert("El valor de SEVERITY debe ser 'B' o 'M'.");
     }
   }
 
@@ -126,10 +133,61 @@
 
     $('#messageModal').modal('show');
   }
+
+  function uploadImage(event) {
+    event.preventDefault();
+
+    var fileInput = document.getElementById("upFile");
+    var file = fileInput.files[0];
+
+    if (file) {
+      var fileName = file.name;
+      var fileExtension = fileName.split(".").pop().toLowerCase();
+
+      // Verifica la extensión del archivo (opcional)
+      if (fileExtension !== "png" && fileExtension !== "jpg" && fileExtension !== "jpeg") {
+        alert("Por favor, selecciona un archivo de imagen en formato PNG o JPEG.");
+        return;
+      }
+
+      // Crea una instancia del objeto S3 de AWS
+      var s3 = new AWS.S3({
+        region: 'us-east-1',
+        credentials: {
+          accessKeyId: 'ASIAQQ25ZEMYUKMOHHV4',
+          secretAccessKey: '2OoCMzTyIl1AGOqrqwkjyok36ACxwjhj1n7mbqTu',
+          sessionToken:'FwoGZXIvYXdzEEoaDIVJ76awOBpWgoAajCLYAcN6P8pb2EK/LGI9HGeMMNFVkeqkbY2HbOZxbr4Jx8R6IlUcml/iTnzgMX1ubbQGHFbtHtd1SbypzyxBvTTvHieYIcHriKd/4aV79SQEcLKCfAKcNs0aFfh2tfJEyg1KRisjJO7PmWDw5lSuhvKsJdhEVfOa92tRv2+NAc2cV2DHd9r/zJY0ma8XxWLOzjzbSsgVWYGfG60vTHIiFpAYyf4gL8LvaxnWVShiwjN8+u8JgnjTNmGFrQBrd9JT121KmdmpV32sczWiNyrw4vGV0CBBd9cT3b4qwyjXppmjBjIt8HZlhVePOLrmbO2WmGzafyd9+WdIQczvtPioxZayVDttvGgWk+vOz3rNSVmF'
+
+        }
+      });
+
+      // Configura los parámetros de la solicitud de carga
+      var params = {
+        Bucket: "proyectoarep", // Nombre del bucket de S3
+        Key: fileName, // Nombre del archivo en S3
+        Body: file, // Archivo a cargar
+        ACL: "public-read" // Opcional: establece el permiso de acceso del archivo cargado
+      };
+      console.log(params)
+
+      // Realiza la solicitud de carga
+      s3.upload(params, function (err, data) {
+        if (err) {
+          console.error("Error al cargar el archivo:", err);
+        } else {
+          console.log("Archivo cargado exitosamente:", data);
+          // Realiza las acciones necesarias después de la carga exitosa
+          // Por ejemplo, muestra un mensaje de éxito o actualiza la interfaz de usuario
+        }
+      });
+    } else {
+      alert("Por favor, selecciona un archivo de imagen.");
+    }
+  }
+
+// Agrega un evento de escucha al formulario de carga
+var uploadForm = document.getElementById("uploadForm");
+uploadForm.addEventListener("submit", uploadImage);
 </script>
 </body>
 </html>
-
-
-
-
