@@ -45,3 +45,13 @@ Para la primera parte practica se implemento una aplicación donde el usuario pu
 ![img_7.png](img_7.png)
 
 ![img_8.png](img_8.png)
+
+![image](https://github.com/danielagar320/ProyectoAREP/assets/90571387/cb8b9199-afca-4e9b-9dff-1e052b1513a5)
+
+![image](https://github.com/danielagar320/ProyectoAREP/assets/90571387/5d43fdf9-361f-4a9c-937c-2eb89d2b95de)
+
+![image](https://github.com/danielagar320/ProyectoAREP/assets/90571387/4b3635d5-23ba-40d7-8d20-22be8b7a48d1)
+
+
+
+
