@@ -3,6 +3,7 @@
 <head>
   <title>Formulario</title>
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
@@ -20,12 +21,12 @@
   </div>
 
   <div id="dataTab" class="tabcontent">
-    <form id="dataForm" action="/cancer/data" method="post">
+    <form id="dataForm" onsubmit="submitData(event)">
       <div class="form-container">
-        <input type="text" id="severity" name="severity" placeholder="SEVERITY">
-        <input type="text" id="x" name="x" placeholder="X">
-        <input type="text" id="y" name="y" placeholder="Y">
-        <input type="text" id="radius" name="radius" placeholder="RADIUS">
+        <input type="text" id="severity" placeholder="SEVERITY">
+        <input type="text" id="x" placeholder="X">
+        <input type="text" id="y" placeholder="Y">
+        <input type="text" id="radius" placeholder="RADIUS">
       </div>
       <button class="tablink button-primary" type="submit" class="submit-button">Enviar</button>
     </form>
@@ -43,41 +44,92 @@
   </div>
 </div>
 
+<div id="messageModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="messageModalLabel">Resultado</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="messageText"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script>
-        function openTab(tabName, button) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablink");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            button.className += " active";
-
-            document.getElementById("backButton").style.display = "block";
-            document.getElementById("dataButton").style.display = "none";
-            document.getElementById("imageButton").style.display = "none";
-        }
-
-        function goBack() {
-            var tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (var i = 0; i < tabcontent.length; i++) {
-              tabcontent[i].style.display = "none";
-              }
-              tablinks = document.getElementsByClassName("tablink");
-              for (var i = 0; i < tablinks.length; i++) {
-              tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-        document.getElementById("backButton").style.display = "none";
-        document.getElementById("dataButton").style.display = "block";
-        document.getElementById("imageButton").style.display = "block";
+  function openTab(tabName, button) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
     }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    button.className += " active";
+
+    document.getElementById("backButton").style.display = "block";
+    document.getElementById("dataButton").style.display = "none";
+    document.getElementById("imageButton").style.display = "none";
+  }
+
+  function goBack() {
+    var tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (var i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (var i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById("backButton").style.display = "none";
+    document.getElementById("dataButton").style.display = "block";
+    document.getElementById("imageButton").style.display = "block";
+  }
+
+  function submitData(event) {
+    event.preventDefault();
+
+    var severityInput = document.getElementById("severity");
+    var xInput = document.getElementById("x");
+    var yInput = document.getElementById("y");
+    var radiusInput = document.getElementById("radius");
+
+    var severityValue = severityInput.value.trim().toUpperCase();
+
+    if (severityValue === "B" || severityValue === "M") {
+      var form = document.getElementById("dataForm");
+
+      var resultMessage = (severityValue === "B") ? "El tumor es Benigno" : "El tumor es Maligno";
+      showResultMessage(resultMessage);
+    } else {
+      alert("El valor de SEVERITY debe ser 'B'  o 'M'.");
+    }
+  }
+
+  function showResultMessage(message) {
+    var messageText = document.getElementById("messageText");
+    messageText.textContent = message;
+
+    $('#messageModal').modal('show');
+  }
 </script>
 </body>
 </html>
+
+
 
 
