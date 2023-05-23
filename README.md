@@ -44,13 +44,36 @@ Para la primera parte practica se implemento una aplicación donde el usuario pu
 
 ![img_7.png](img/img_7.png)
 
+## Parte 2
+
+* Para la parte de aws, creamos un bucket en donde agregamos las imagenes de la radiografia
+
 ![img_8.png](img/img_8.png)
 
+* Ya teniendo las imagenes, creamos el dataset identificando cada una de las fotos con su respectiva etiqueta
+
 ![image](https://github.com/danielagar320/ProyectoAREP/assets/90571387/cb8b9199-afca-4e9b-9dff-1e052b1513a5)
+
+* Ya teniendo esto, entrenamos el modelo.
 
 ![image](https://github.com/danielagar320/ProyectoAREP/assets/90571387/5d43fdf9-361f-4a9c-937c-2eb89d2b95de)
 
 ![image](https://github.com/danielagar320/ProyectoAREP/assets/90571387/4b3635d5-23ba-40d7-8d20-22be8b7a48d1)
+
+* Al finalizar el entrenamiento, podemos usar el modelo cargando las imagenes del bucket e identificando su diagnostico correspondiente.
+
+![image](https://github.com/danielagar320/ProyectoAREP/assets/90571387/a60c7ce0-0439-4da7-91f6-1462cc0c32cb)
+
+![image](https://github.com/danielagar320/ProyectoAREP/assets/90571387/ffd7f497-2b97-430b-acc5-bfb127270675)
+
+![image](https://github.com/danielagar320/ProyectoAREP/assets/90571387/71754a6c-b978-44fe-8d4e-1bfa6f2a33d0)
+
+![image](https://github.com/danielagar320/ProyectoAREP/assets/90571387/a34ff5b0-5292-4523-9be7-f02632686b0e)
+
+## Video demostración
+
+https://youtu.be/A8VgoknZ0NY
+
 
 
 
