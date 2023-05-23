@@ -134,7 +134,7 @@
     $('#messageModal').modal('show');
   }
 
-  function uploadImage(event) {
+  function >(event) {
     event.preventDefault();
 
     var fileInput = document.getElementById("upFile");
@@ -154,16 +154,16 @@
       var s3 = new AWS.S3({
         region: 'us-east-1',
         credentials: {
-          accessKeyId: 'ASIAQQ25ZEMYUKMOHHV4',
-          secretAccessKey: '2OoCMzTyIl1AGOqrqwkjyok36ACxwjhj1n7mbqTu',
-          sessionToken:'FwoGZXIvYXdzEEoaDIVJ76awOBpWgoAajCLYAcN6P8pb2EK/LGI9HGeMMNFVkeqkbY2HbOZxbr4Jx8R6IlUcml/iTnzgMX1ubbQGHFbtHtd1SbypzyxBvTTvHieYIcHriKd/4aV79SQEcLKCfAKcNs0aFfh2tfJEyg1KRisjJO7PmWDw5lSuhvKsJdhEVfOa92tRv2+NAc2cV2DHd9r/zJY0ma8XxWLOzjzbSsgVWYGfG60vTHIiFpAYyf4gL8LvaxnWVShiwjN8+u8JgnjTNmGFrQBrd9JT121KmdmpV32sczWiNyrw4vGV0CBBd9cT3b4qwyjXppmjBjIt8HZlhVePOLrmbO2WmGzafyd9+WdIQczvtPioxZayVDttvGgWk+vOz3rNSVmF'
+          accessKeyId: 'ASIAYF6OY2D6QDVI3LHF',
+          secretAccessKey: 'FLCKqqfxjgeFFRKTS8DfKP4dlhjTPoc21yQrEtoT',
+          sessionToken:'FwoGZXIvYXdzEKv//////////wEaDLXmnx+atGlSFLA0PCLZAV4blrQxBAef2Mm4WXUwc0Ia5YuRMjYHhUWpidYELrLDaUqyDSpbVDxPX/0MCxHnwskVxmO0yoxtBLbEuiZgkk0Pv50plQpxKL586fudBEkFPBrJ5QkX8mZ0dWQqkZIek0IE8j99RQjnGHhM08/JeyqSeXSH1x03QhrRD04D/FkAAlZ4H5M+E2Hy6g8n3BjxUXWu/+uilJMUbOJ1Zf3Z5eiZcx9dy+uIc56AMg9EtQinovt1dtXW1fNuHAH1hFG/x2oyoj584aOfcfWk/Di4e2rgOpZbG6nAZJIowMuuowYyLckk3/j6Q6Zr1M/w86cdW3WSuGQp0zH4vN1CVVbAeSq+dWrwm9lilFiZqL/K1g=='
 
         }
       });
 
       // Configura los parámetros de la solicitud de carga
       var params = {
-        Bucket: "proyectoarep", // Nombre del bucket de S3
+        Bucket: "custom-labels-console-us-east-1-3799af327c", // Nombre del bucket de S3
         Key: fileName, // Nombre del archivo en S3
         Body: file, // Archivo a cargar
         ACL: "public-read" // Opcional: establece el permiso de acceso del archivo cargado
@@ -185,9 +185,9 @@
     }
   }
 
-// Agrega un evento de escucha al formulario de carga
-var uploadForm = document.getElementById("uploadForm");
-uploadForm.addEventListener("submit", uploadImage);
+  // Agrega un evento de escucha al formulario de carga
+  var uploadForm = document.getElementById("uploadForm");
+  uploadForm.addEventListener("submit", uploadImage);
 </script>
 </body>
 </html>
